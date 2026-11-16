@@ -401,6 +401,13 @@ runs:
         CLANG_FOUND=false
         # Spring uses its validated compiler instead of the newest available one.
         if [[ "${MODEL}" == "SPRING" ]]; then
+          # Download Spring compiler binaries stored through Git LFS.
+          CLANG_ROOT="${KERNEL_PLATFORM}/prebuilts/clang/host/linux-x86"
+          if ! command -v git-lfs >/dev/null 2>&1; then
+            sudo apt-get install -y git-lfs
+          fi
+          git -C "${CLANG_ROOT}" lfs install --local
+          git -C "${CLANG_ROOT}" lfs pull --include="clang-r487747c/**" --exclude="" yaosp
           CLANG_BIN="${KERNEL_PLATFORM}/prebuilts/clang/host/linux-x86/clang-r487747c/bin"
           [[ -x "${CLANG_BIN}/clang" ]] || {
             echo "Spring compiler missing: ${CLANG_BIN}/clang"
