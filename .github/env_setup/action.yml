@@ -237,6 +237,10 @@ runs:
         KERNEL_KIT="${GITHUB_WORKSPACE}/kernel_kit"
         # BOUTON_KERNEL_PATCHES="${GITHUB_WORKSPACE}/bouton_kernel_patches"
         BUILD_CONFIG=${KERNEL_KIT}/device/${CODENAME}-${OS_SHORT}/build_config/build.config.${CODENAME}.${OS_SHORT}
+        LOCAL_BUILD_CONFIG="${GITHUB_WORKSPACE}/device/${CODENAME}-${OS_SHORT}/build_config/build.config.${CODENAME}.${OS_SHORT}"
+        if [[ -f "${LOCAL_BUILD_CONFIG}" ]]; then
+          BUILD_CONFIG="${LOCAL_BUILD_CONFIG}"
+        fi
         
 
         # Export standard gki variables
@@ -395,6 +399,20 @@ runs:
         set -euo pipefail
         echo "::group::Detecting Clang..."
         CLANG_FOUND=false
+        # Spring uses its validated compiler instead of the newest available one.
+        if [[ "${MODEL}" == "SPRING" ]]; then
+          CLANG_BIN="${KERNEL_PLATFORM}/prebuilts/clang/host/linux-x86/clang-r487747c/bin"
+          [[ -x "${CLANG_BIN}/clang" ]] || {
+            echo "Spring compiler missing: ${CLANG_BIN}/clang"
+            exit 1
+          }
+          echo "${CLANG_BIN}" >> "${GITHUB_PATH}"
+          CLANG_VERSION="$("${CLANG_BIN}/clang" --version | head -n1)"
+          echo "CLANG_VERSION=${CLANG_VERSION}" >> "${GITHUB_ENV}"
+          echo "${CLANG_VERSION}"
+          echo "::endgroup::"
+          exit 0
+        fi
         for base in "${KERNEL_PLATFORM}/prebuilts" "${KERNEL_PLATFORM}/prebuilts-master"; do
           [ -d "${base}/clang/host/linux-x86" ] || continue
 

@@ -1,0 +1,20 @@
+{
+  "model": "SPRING",
+  "product": "Xiaomi Spring",
+  "soc": "blair",
+  "codename": "spring",
+  "branch": "spring-dragonw1nd-manual",
+  "boot_partition_size": "100663296",
+  "vendor_boot_partition_size": "100663296",
+  "qcacld_dev_name": "",
+  "clang": "manifest",
+  "tree": "monolithic",
+  "manifest_custom": {
+    "url": "https://raw.githubusercontent.com/atom7890/Dragonw1nd-Kernels/refs/heads/spring-local-build/manifests/spring.xml",
+    "os": "Custom",
+    "os_short": "custom"
+  },
+  "android_version": "android14",
+  "kernel_version": "6.1",
+  "hmbird": false
+}

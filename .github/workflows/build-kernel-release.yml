@@ -110,6 +110,7 @@ on:
           - POCO_X6
           - REDMI_15
           - REDMI_12
+          - SPRING
         default: OP11
       mlgo:
         description: 'enable mlgo [Machine Learning Guided Optimization] (requires compiler support)'

@@ -1,0 +1,15 @@
+CONFIGS_GKI=(spring_defconfig)
+
+MAKE_FLAGS=(
+  -j"$(nproc)"
+  ARCH=arm64
+  LLVM=1
+  LLVM_IAS=1
+  TARGET_BOARD_PLATFORM=blair
+  CC="ccache clang"
+  HOSTCC="ccache clang"
+  HOSTCXX="ccache clang++"
+  DEPMOD=depmod
+)
+
+export LOCALVERSION=
