@@ -225,7 +225,7 @@ runs:
         echo "Using AnyKernel3 branch: $ANYKERNEL_BRANCH"
         git clone --depth=1 https://github.com/nullptr-t-oss/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
         git clone --depth=1 https://github.com/TheWildJames/kernel_patches.git
-        git clone --depth=1 https://github.com/nullptr-t-oss/kernel_kit.git
+        git clone --depth=1 https://github.com/atom7890/kernel_kit.git
         # git clone --depth=1 https://github.com/Bouteillepleine/kernel_patches.git -b main bouton_kernel_patches
 
     - name: Setup Base Environment
@@ -237,10 +237,6 @@ runs:
         KERNEL_KIT="${GITHUB_WORKSPACE}/kernel_kit"
         # BOUTON_KERNEL_PATCHES="${GITHUB_WORKSPACE}/bouton_kernel_patches"
         BUILD_CONFIG=${KERNEL_KIT}/device/${CODENAME}-${OS_SHORT}/build_config/build.config.${CODENAME}.${OS_SHORT}
-        LOCAL_BUILD_CONFIG="${GITHUB_WORKSPACE}/device/${CODENAME}-${OS_SHORT}/build_config/build.config.${CODENAME}.${OS_SHORT}"
-        if [[ -f "${LOCAL_BUILD_CONFIG}" ]]; then
-          BUILD_CONFIG="${LOCAL_BUILD_CONFIG}"
-        fi
         
 
         # Export standard gki variables
