@@ -31,3 +31,9 @@ spring_register_bbg() {
 }
 
 POST_DEFCONFIG_CMDS=spring_register_bbg
+
+# Spring's integrated WLAN driver must use standalone kernel paths.
+MAKE_FLAGS+=(
+  ANDROID_BUILD_TOP=
+  LINUX_BUILD_TOP=
+)
